@@ -50,6 +50,7 @@ const CHOICE_EVENTS = [
       { label: "Breathe slow and low", energy: -3, coping: 8, dilation: 0.1, flavor: "You slow your breath down, and the room slows with it." },
       { label: "Change position", energy: -6, coping: 4, dilation: 0.3, flavor: "You shift, and something in your body seems to agree with the choice." },
       { label: "Squeeze your partner's hand", energy: -1, coping: 10, dilation: 0.1, flavor: "You hold on tighter than you meant to. Nobody minds." },
+      { label: "Grab the dinosaur from your bag", energy: -1, coping: 9, dilation: 0.1, flavor: "You dig it out and hold it against your chest. It smells like home." },
     ],
   },
   {
@@ -394,9 +395,11 @@ export default function LaborGame() {
         >
           {phase === "intro" && (
             <div className="text-center">
-              <div className="text-5xl mb-4 drift">🌙</div>
+              <div className="text-5xl mb-4 drift">🦖</div>
               <h1 className="text-3xl mb-2" style={{ color: PALETTE.cream }}>Labor of Love</h1>
               <p className="text-sm mb-4" style={{ color: PALETTE.lavender }}>
+                Somewhere in your hospital bag is a small stuffed dinosaur, soft and a little
+                lopsided, the one you've had since you were a kid. It's coming with you.
                 Contractions here don't come on a steady beat — some are mild, some knock the wind
                 out of you, and the gaps between them shrink as labor goes on. As you tire, staying
                 on rhythm gets harder, the same way it does in the room, not just on the page.
@@ -414,7 +417,10 @@ export default function LaborGame() {
             <div>
               <div className="flex justify-between items-baseline mb-1">
                 <span className="text-sm" style={{ color: PALETTE.coral }}>{phase === "pushing" ? "Pushing" : stage.label}</span>
-                <span className="text-xs" style={{ color: PALETTE.lavender }}>{formatClock(storyMinutes)}</span>
+                <span className="flex items-center gap-2 text-xs" style={{ color: PALETTE.lavender }}>
+                  <span aria-hidden="true">🦖</span>
+                  {formatClock(storyMinutes)}
+                </span>
               </div>
 
               <div className="mb-4">
@@ -498,8 +504,9 @@ export default function LaborGame() {
 
           {phase === "complete" && (
             <div className="text-center riseIn">
-              <div className="text-5xl mb-4">👶</div>
+              <div className="text-5xl mb-2">👶 🦖</div>
               <h1 className="text-2xl mb-2" style={{ color: PALETTE.cream }}>Welcome, little one</h1>
+              <p className="text-xs mb-2" style={{ color: PALETTE.lavender }}>The dinosaur made it too — a little worse for wear, still tucked under your arm.</p>
               <p className="text-sm mb-4" style={{ color: PALETTE.lavender }}>
                 {Math.floor(elapsed / 60)}m {elapsed % 60}s of real time — representing hours of labor,
                 the way it always does.
